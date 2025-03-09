@@ -87,7 +87,138 @@ Working on DockerDesktop - There difference components in Docker Desktop but we 
 - Since we are using powershell execute below command to create a docker file with the name "Dockerfile"
   "New-Item -Path "C:\Users\Pavan Kumar\day02_code1\Dockerfile" -ItemType File"
 
+## Using https://labs.play-with-docker.com/ 
 
+
+https://labs.play-with-docker.com/ 
+
+It is a 4hr windows created to do the handon. One the 4hr window completes you need to create anew window to do the handon.
+Lets dig-in further.
+Here we will follow the Docker flow, so first we need a application file in you local repository to create a local file.
+Lets create a file now for that in you local repository create a folder.
+
+> mkdir Day02
+- This will create a folder with name Day02.
+
+Now CD into this folder
+> cd Day02/
+- This will make Day02 as your working directory
+
+Now lets create a file
+> git clone https://github.com/docker/getting-started-app.git
+- This will clone the git repository into you local repository
+
+Now lets create a dockerfile for that lets create an empty file
+> touch Dockerfile
+ - This command will create a file with Dockerfile
+
+Now lets edit the Dockerfile
+> vi Dockerfile
+- This command will give you to edit the file
+
+By default it will be escape mode so enter "i" to start insert mode.
+
+## Instructions to write a docker file (All the key words you will be using here will be in upper case)
+
+To run any image you need a base image to run the application.
+
+> FROM node:18-alpine
+- This step will call the image onto the node, which means it is a platform to run your application. you can also use different OS but choose the light weight. You can find them from Dockerhub repository. In this case we are choosing alpine image which is aLinux light weight OS.
+
+> WORKDIR /app
+- Is the working directory where you will be doing all your work inside a container at root level and every work will be done on this container.
+
+> COPY . .
+- The files we cloned from git repo should be moved/copy them inside the container so that they will be used as source code.
+- first . is current directory
+- second . is work directory where I am currently on of container.
+
+> RUN  yarn install --production
+- Will install all the dependencies of the application, we are using yarn as package manager.
+
+> CMD ["node", "src/index.js"]
+- Which is actually responsible to executing the application.
+
+> EXPOSE 3000
+- This will used to expose your application and make it available on this port.
+
+Now lets exist the editor.
+
+Hit Esc
+Hold Shift key and enter :
+Type wq!
+
+This will save the file.
+
+Now we have the Docker file created, lets create Docker image.
+
+Enter the docker commands
+For beginners you can type docker --help, which will list all the commands and help you futher. Since w are building the image choose build, lets further take help on this
+
+> docker build -- help
+
+> "docker build -t day02-todo ."
+- This means you are building the docker image with the name day02-todo and you are asking to take the input file from the current directory by enter "."
+
+Now do the cat of the Docker file, we have 6 lines of codein that file and when you do docker build it will do the building the same way line by line.
+
+Now lets see the created image by entering below command
+
+> docker images
+- You will have the file name, size of it, image version(collected from Docker hub), docker id.
+
+So till now we have created the Docker file by cloning the app files from dockerhub, created in a local repository. Using this dockerfile we have build docker image and stored in local repository.
+
+
+Now lets push the docker image into image repository example docker hub.
+
+Login to Dockerhub, create a new repository. Lets name it test-repo and make it public and create.
+
+Now when you are ready to push the image, use the below command to do it and before pushing the image we need to tag it.
+
+> docker tag day02-todo:latest pk98723/test-repo:latest
+
+This will create a new repository pk98723/test-repo
+
+Now lets push the image
+
+> docker push pkdocker1103/test-repo:latest
+- Initially it will throw an error we haven't authenticated to docker hub.
+
+So lets authenticate
+
+> docker login
+- It will ask for username and password.
+
+Once auth is successful, push the image again
+
+> docker push pk98723/test-repo:latest
+- This step will push the image onto repo, one key difference to observe here is the size of the image in local repository will be more comparing to the image on the dockerhub. By default the image size will be compressed
+
+
+Now lets pull the image
+
+> docker pull pk98723/test-repo:latest
+ - Since the image is in my local system, it will say that image is up to date incase there is any diference, it will download the latest.
+
+
+Now lets run the image
+
+> docker run -dp 3000:3000 pk98723/test-repo:latest
+- d stands for detach mode, it means it will run the process in backend
+- p stands for port which we wil expose.
+
+Now after you hit the above command it will spitout the container ID which is a unique ID for this container.
+
+> docker ps
+- To see if the container is actually running, use above command to see the details
+
+
+Inorder to troubleshoot the container incase it is not working as expected then you need to go inside the container.
+
+> docker exec -it "add friendly name or container id" sh
+- Now you will enter the container /app which is our working directory
+- Now exit the container with command "exit"
 
 
 
