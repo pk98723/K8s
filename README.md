@@ -128,7 +128,7 @@ To run any image you need a base image to run the application.
 > WORKDIR /app
 - Is the working directory where you will be doing all your work inside a container at root level and every work will be done on this container.
 
-> COPY . .
+> COPY .  .
 - The files we cloned from git repo should be moved/copy them inside the container so that they will be used as source code.
 - first . is current directory
 - second . is work directory where I am currently on of container.
