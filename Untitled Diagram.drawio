@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.0">
   <diagram name="Page-1" id="y6G4Nf0KlYp92I5MaanY">
-    <mxGraphModel dx="770" dy="737" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="767" dy="737" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -101,6 +101,70 @@
               <mxPoint x="350" y="360" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-27" value="Docker file" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="682" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-28" target="zMn05R0uiguW8_Lxjruq-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-28" value="Docker image" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="672" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-30" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="702" as="sourcePoint" />
+            <mxPoint x="200" y="692" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-31" value="docker build" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="632" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-33" target="zMn05R0uiguW8_Lxjruq-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-33" value="Registry" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="582" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-34" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="375" y="692" width="295" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-36" value="Dev" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="722" width="60" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-37" value="Test" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="722" width="60" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-38" value="Prod" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="722" width="60" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-39" target="zMn05R0uiguW8_Lxjruq-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-39" value="docker run" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="862" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-40" target="zMn05R0uiguW8_Lxjruq-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-40" value="docker push" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="314" y="602" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-41" value="docker pull" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="662" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.458;entryY=0.013;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-41" target="zMn05R0uiguW8_Lxjruq-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.617;entryY=1.011;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-39" target="zMn05R0uiguW8_Lxjruq-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.633;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="zMn05R0uiguW8_Lxjruq-39" target="zMn05R0uiguW8_Lxjruq-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-51" value="Docker Flow" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="542" width="670" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
