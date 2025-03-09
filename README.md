@@ -63,6 +63,7 @@ Explaining inbuild componenets:
 
 
 ## Day 2 How to Dockerize an application
+_________________________________________
 Use below links to create docker lab to proceed further
 https://labs.play-with-docker.com/ 
 https://labs.play-with-k8s.com/
