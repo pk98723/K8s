@@ -40,7 +40,8 @@ What is Registry
 - With the help of "Docker Pull" command the image will be pulled onto different environment.
 - Then run "Docker Run" - this will convert your package into running instance.
 
-## Docker Architecture: Please refer draw.io
+## Docker Architecture:
+Please refer Untitled Diagram.drawio
 Explaining inbuild componenets:
 
 ## docker build 
@@ -59,6 +60,11 @@ Explaining inbuild componenets:
   
 # docker run
 - Now docker run command will be issued to dockerd and dockerd instruct container runtime to run the image pulled from registry.
+
+
+## Day 2 How to Dockerize an application
+
+
 
 
 
