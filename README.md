@@ -2,7 +2,7 @@
 
 Today the topic we are going to cover is Docker amd its understanding:
 Fundamental of Docker is Build, Ship and Run the application code. Docker is nothing but a platform that helps you to build, ship and run the application code.
-COntainer vs VM
+## Container vs VM
 VM - is a virtual computer which has OS
 
 Consider VM as an independent house and contrainer as an apartment
@@ -15,7 +15,7 @@ On Container
 -  But they share the infra, building, land
 -  Every container(flat) has independent Application, Binaries dependency OS etc.
 
-Docker flow:
+## Docker flow:
                        push
                      --------------Registry--------------------
                    |                    | |_pull___           |
@@ -23,7 +23,7 @@ Docker flow:
 Dockerfile --> Docker Image            Dev        Test        Prod
                                         |          |          |
                                         |_________ Run _______|
-Exlaining above flow:
+## Exlaining above flow:
 What is Docker file
 - WHich is usually a set of intruction
 - Like install some app, Run these commands on the OS etc.,
@@ -40,7 +40,7 @@ What is Registry
 - With the help of "Docker Pull" command the image will be pulled onto different environment.
 - Then run "Docker Run" - this will convert your package into running instance.
 
-Docker Architecture: Please refer draw.io
+## Docker Architecture: Please refer draw.io
 Explaining inbuild componenets:
 
 ## docker build 
