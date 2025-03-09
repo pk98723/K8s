@@ -166,6 +166,9 @@
         <mxCell id="zMn05R0uiguW8_Lxjruq-51" value="Docker Flow" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="40" y="542" width="670" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="zMn05R0uiguW8_Lxjruq-52" value="Docker Architecture" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" width="690" height="30" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
