@@ -43,18 +43,21 @@ What is Registry
 Docker Architecture: Please refer draw.io
 Explaining inbuild componenets:
 
-#docker build 
+## docker build 
 - When we run docker build command, it will pull the image from source code (baasically a dockerfile will be pulled) and Docker daemon(dockerd) will create an image with the help of dockerfile.
 - Now the image is issues to local host
 - next step is you need an intermediate storage to store the image.
-#docker push
+  
+## docker push
 - Now docker push command will be run and the created image will be pushed to a registry.
 - There are different types of registries the most used is DockerHub.
 - So when docker push command is ran, the image is stored in DockerHub registry by dockerd.
 - Now the image is ready and it should be pulled into different environments
-#docker pull
+  
+## docker pull
 - Now docker pull will be issued to the dockerd and image will be pulled into the environment, lets say you are running on Devlopment environment then the image will be pulled onto Dev environment from the Dockerhub registry.
-#docker run
+  
+# docker run
 - Now docker run command will be issued to dockerd and dockerd instruct container runtime to run the image pulled from registry.
 
 
