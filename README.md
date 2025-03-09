@@ -63,8 +63,23 @@ Explaining inbuild componenets:
 
 
 ## Day 2 How to Dockerize an application
+Use below links to create docker lab to proceed further
+https://labs.play-with-docker.com/
+https://labs.play-with-k8s.com/
+
+Working on DockerDesktop - There difference components in Docker Desktop but we only use Container and Images. Rest are not needed now.
+ ---Pavan to do a end to end video on how to use Dockerdesktop
+
+- Open Dockerdesktop and hit on Terminal on right bottom to open Powershell session.
+- Now create a folder with command "mkdir Day02_code1"
+- Do "ls", you will see it empty.
+- Now we need an application installed on it to play with it. Use below link to clone it  - git clone https://github.com/docker/getting-started-app.git
+
+ Install Git - I used https://git-scm.com/downloads link to install Git.
 
 
+
+ Open Git Bash and try to clone
 
 
 
