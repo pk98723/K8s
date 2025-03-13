@@ -280,6 +280,9 @@ https://labs.play-with-docker.com/  - Used this to do day 3 praticals
 
 
 
+### DAY 4 - WHAT IS KUBERNATES & WHY IT IS USED
+
+
 
 
 
