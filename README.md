@@ -304,7 +304,7 @@ There are sub compoenents in above components, their usage and definations are d
 - Any data needed to be retrieved from ETCD db will also be done by API server only.
 
 > Schedular
--It receives the request from API server and then lets say someone request to schedule a POD.
+- It receives the request from API server and then lets say someone request to schedule a POD.
 - Schedular will check the suitable node for the POD as per the ask.
 - It will check the many factors like CPU/MEM utilization of the current node, capacity of the current node etc and based on it a node will be allocated to the POD.
 
@@ -336,7 +336,7 @@ There are sub compoenents in above components, their usage and definations are d
  -It creates some IP tables, rules which helps to between pods.
 
 
-Example of explaining entire architecture of K8:
+# Example of explaining entire architecture of K8:
 
 Lets say a user requested to create a pod. Steps are as follows:
 1. User requested to create a pod by using kubectl.
