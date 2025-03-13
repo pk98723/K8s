@@ -223,6 +223,71 @@ Inorder to troubleshoot the container incase it is not working as expected then 
 
 
 
+## Day 3 Multistage Dockerize an application
+_________________________________________
+https://labs.play-with-docker.com/  - Used this to do day 3 praticals
+
+1. Create a directory
+>mkdir Day03
+2. Make created directory as working directory
+>cd Day03
+3. Clone a project into it
+>git clone https://github.com/piyushsachdeva/todoapp-docker.git
+4. Check what are all files are there in the docker
+>ls -lrt
+5. A new directory will be created wih the name "todoapp-docker" and make this as working directory
+>cd todoapp-docker
+6. Lets create a Docker file to create a docker image from it.
+>touch Dockerfile
+- By entering above command it will create a docker file inside
+7. Now lets enter the code inside it by view editor
+> vi Dockerfile
+- This command will open the file in edit mode.
+8. Lets start updating the code in the file, initially the file will be in escape mode so lets make it into insert mode by entering "i"
+9. Lets update the code
+  > FROM node:18-alpine AS installer
+  > WORKDIR /app
+  > COPY package*.json ./
+  > RUN npm install
+  > COPY . .
+  > RUN npm run build
+  > FROM nginx:latest AS deploye
+  > COPY --from=installer app/build /usr/share/ngnix/html
+10. Lets save the code
+  > "wq!
+11. Now lets build the docker image from docker file
+  > docker build -t todoapp-docker .
+  - This command will build the docker image with the name todoapp-docker
+12. Lets see if the image was create or not
+  > docker images
+  - This command will list all the images available
+13. Lets see if there is any container available if not we need to create one.
+ > docker ps
+  - This command will list all the available containers
+  - In current case there is no container available, lets run the docker image to create the container
+14. Lets run the docker image to create a container
+ > docker run -it -dp 3000:3000 todoapp-docker
+  - This command will run the docker image todoapp-docker on a contianer
+15. Now if you do below command it will show the running container
+ > docker ps
+16. If you want to see the logs of any container, you can run below command
+ > docker logs "container id" (generates when you run 14th step)
+17. To go into a container, use below command to do
+ > docker exec -it "container id" sh
+ > By default you will be in working directory as we havent provided any specific directory
+18. To see configuration of any container use below command
+ > docker inspect "container id"
+
+
+
+
+
+
+
+
+
+
+
 
 
 
