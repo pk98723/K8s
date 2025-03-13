@@ -226,6 +226,9 @@ Inorder to troubleshoot the container incase it is not working as expected then 
 
 
 
+## ALIAS
+k=kubectl
+svc=service
 
 
 
@@ -237,11 +240,10 @@ Inorder to troubleshoot the container incase it is not working as expected then 
 
 
 
-
-
-Important Commands Outpu:
-
-
+## Important Commands Output:
+--------------------------------------------------------------------------------------------------------------------------------
+### CLUSTER MANAGEMENT:
+___________________________
 ## controlplane ~ ➜  k cluster-info 
 Kubernetes control plane is running at https://127.0.0.1:6443
 CoreDNS is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
@@ -307,6 +309,200 @@ For many services
 ## controlplane ~ ➜  k get services
 NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   12m
+
+### POD MANAGEMENT:
+____________________________
+k create pod
+
+k get pod
+
+k describe pod
+
+k logs
+
+k exec
+
+k delete pod
+
+### RESOURCE MONITORING
+____________________________
+
+## controlplane ~ ➜ k top node 
+NAME           CPU(cores)   CPU(%)   MEMORY(bytes)   MEMORY(%)   
+controlplane   48m          0%       770Mi           1%  
+
+k top pods
+
+k top pods
+
+k get quota
+
+k describe
+
+### SERVICE MANAGEMENT
+___________________________
+
+k create service
+
+## controlplane ~ ➜ k get service
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   35m
+
+k expose 
+
+## controlplane ~ ➜ k describe service
+Name:                     kubernetes
+Namespace:                default
+Labels:                   component=apiserver
+                          provider=kubernetes
+Annotations:              <none>
+Selector:                 <none>
+Type:                     ClusterIP
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.43.0.1
+IPs:                      10.43.0.1
+Port:                     https  443/TCP
+TargetPort:               6443/TCP
+Endpoints:                192.168.183.228:6443
+Session Affinity:         None
+Internal Traffic Policy:  Cluster
+Events:                   <none>
+
+k delete service 
+
+k port-forward
+
+### CONFIGURATON & SECRETS
+______________________________
+
+k create configmaps
+
+## controlplane ~ ➜ k get configmaps 
+NAME               DATA   AGE
+kube-root-ca.crt   1      39m
+
+k create secret
+
+k get secret
+
+## controlplane ~ ➜  k describe configmaps 
+Name:         kube-root-ca.crt
+Namespace:    default
+Labels:       <none>
+Annotations:  kubernetes.io/description:
+                Contains a CA bundle that can be used to verify the kube-apiserver when using internal endpoints such as the internal service IP or kubern...
+
+Data
+====
+ca.crt:
+----
+-----BEGIN CERTIFICATE-----
+MIIBdzCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+dmVyLWNhQDE3NDE4NDQwNTYwHhcNMjUwMzEzMDUzNDE2WhcNMzUwMzExMDUzNDE2
+WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3NDE4NDQwNTYwWTATBgcqhkjO
+PQIBBggqhkjOPQMBBwNCAAQ601I4GtjUUTZkPw/DismKT2uWLDe84J3D3MfyHeAr
+iIWuVg1S8w1KWy59sWd1cdewCIouUOeBgW5sjWGAY5Zto0IwQDAOBgNVHQ8BAf8E
+BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUZQglFpB4nVFKw3e+m2wa
+WFz0KXgwCgYIKoZIzj0EAwIDSAAwRQIgRQga5ZLQwCRyGLO++pWOrMDWIc6DmwaL
+bj8XZm5GZ5ACIQD3U4TynZNRKNC8B51hCNcpdbwh0fCKPq+D/yAi2r3jjw==
+-----END CERTIFICATE-----
+
+
+
+BinaryData
+====
+
+Events:  <none>
+
+k describe secret
+
+### DEPLOYMENT MANAGEMENT
+_______________________________
+
+k create deployment 
+
+## controlplane ~ ➜  k get deployments
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+simple-webapp-deployment   4/4     4            4           2m46s
+
+k scale
+
+k rollout status
+
+k rollout history
+
+k delete deployment
+
+
+### NAMAESPACE MANAGEMENT
+______________________________
+k create namespace
+
+## controlplane ~ ➜  k get namespaces 
+NAME              STATUS   AGE
+default           Active   49m
+kube-node-lease   Active   49m
+kube-public       Active   49m
+kube-system       Active   49m
+
+## controlplane ~ ✖ k describe namespaces 
+Name:         default
+Labels:       kubernetes.io/metadata.name=default
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+Name:         kube-node-lease
+Labels:       kubernetes.io/metadata.name=kube-node-lease
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+Name:         kube-public
+Labels:       kubernetes.io/metadata.name=kube-public
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+Name:         kube-system
+Labels:       kubernetes.io/metadata.name=kube-system
+Annotations:  <none>
+Status:       Active
+
+No resource quota.
+
+No LimitRange resource.
+
+k delete namespace
+
+k apply -n <namespace>
+
+k switch -n <namespace>
+
+
+Q.  Create a new service to access the web application using the service-definition-1.yaml file.
+
+Name: webapp-service
+Type: NodePort
+targetPort: 8080
+port: 8080
+nodePort: 30080
+selector:
+  name: simple-webapp
+
+
+
+
 
 
 
