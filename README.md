@@ -239,5 +239,84 @@ Inorder to troubleshoot the container incase it is not working as expected then 
 
 
 
+Important Commands Outpu:
+
+
+## controlplane ~ ➜  k cluster-info 
+Kubernetes control plane is running at https://127.0.0.1:6443
+CoreDNS is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Metrics-server is running at https://127.0.0.1:6443/api/v1/namespaces/kube-system/services/https:metrics-server:https/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+
+## controlplane ~ ➜  k config 
+Modify kubeconfig files using subcommands like "kubectl config set current-context my-context".
+
+ The loading order follows these rules:
+
+  1.  If the --kubeconfig flag is set, then only that file is loaded. The flag may only be set once and no merging takes
+place.
+  2.  If $KUBECONFIG environment variable is set, then it is used as a list of paths (normal path delimiting rules for
+your system). These paths are merged. When a value is modified, it is modified in the file that defines the stanza. When
+a value is created, it is created in the first file that exists. If no files in the chain exist, then it creates the
+last file in the list.
+  3.  Otherwise, ${HOME}/.kube/config is used and no merging takes place.
+
+Available Commands:
+  current-context   Display the current-context
+  delete-cluster    Delete the specified cluster from the kubeconfig
+  delete-context    Delete the specified context from the kubeconfig
+  delete-user       Delete the specified user from the kubeconfig
+  get-clusters      Display clusters defined in the kubeconfig
+  get-contexts      Describe one or many contexts
+  get-users         Display users defined in the kubeconfig
+  rename-context    Rename a context from the kubeconfig file
+  set               Set an individual value in a kubeconfig file
+  set-cluster       Set a cluster entry in kubeconfig
+  set-context       Set a context entry in kubeconfig
+  set-credentials   Set a user entry in kubeconfig
+  unset             Unset an individual value in a kubeconfig file
+  use-context       Set the current-context in a kubeconfig file
+  view              Display merged kubeconfig settings or a specified kubeconfig file
+
+Usage:
+  kubectl config SUBCOMMAND [options]
+
+Use "kubectl config <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+## controlplane ~ ➜ k version 
+Client Version: v1.32.0+k3s1
+Kustomize Version: v5.5.0
+Server Version: v1.32.0+k3s1
+
+## controlplane ~ ➜ k get nodes 
+NAME           STATUS   ROLES                  AGE   VERSION
+controlplane   Ready    control-plane,master   11m   v1.32.0+k3s1
+
+## controlplane ~ ➜  k get pods
+No resources found in default namespace.
+
+For single service
+## controlplane ~ ➜  k get service
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   12m
+
+For many services
+## controlplane ~ ➜  k get services
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   12m
+
+
+
+
+
+
+
+
+
+
+
 
 
