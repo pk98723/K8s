@@ -280,7 +280,78 @@ https://labs.play-with-docker.com/  - Used this to do day 3 praticals
 
 
 
-### DAY 4 - WHAT IS KUBERNATES & WHY IT IS USED
+### DAY 4 & 5 - WHAT IS KUBERNATES & WHY & HOW IT IS USED
+
+K8's consists of 2 components
+
+1. Control plane/Master node
+- Is a VM or a node which host admin components which has specific purposes.
+ex - Control plane is a board of management members who assign work to the repartees.
+- It will instruct Worker node to do many tasks via admin components
+- In HA, we will have more than one master node
+  
+2. Worker node
+- Consider it as VM
+  
+There are sub compoenents in above components, their usage and definations are defined below:
+
+## Components of control plan:
+
+> ETCD
+- It is a Key-value data store
+- It store everything about the cluster like its state, pods, nodes, secrets etc.,
+- Only API server will interact with ETCD db, it is nly having authority to do the changes.
+- Any data needed to be retrieved from ETCD db will also be done by API server only.
+
+> Schedular
+-It receives the request from API server and then lets say someone request to schedule a POD.
+- Schedular will check the suitable node for the POD as per the ask.
+- It will check the many factors like CPU/MEM utilization of the current node, capacity of the current node etc and based on it a node will be allocated to the POD.
+
+> API Server
+- Any incoming request from client/outside will first some to API server
+
+> Controller Manager
+- Which is a combinations of many different controller like node controller, namespace controller, deployment controller etc.,
+- If a POD goes down, controller manager will monitor the POD and it will keep restarting that POD with help of pod controller.
+- It ensure the components and deployments like POD, Node is healthy
+
+## Conponents of Worker Node
+
+> Pod
+- It contains containers.
+- Pod can have one or more container in it
+- It is smallest deployment unit
+- Pod is something helps you to run a container
+
+> Kubelet
+- It something received instructions from control plane(from API server)
+- Lets says kublet will receive instruction to delete a pod.
+- Kubelet will delete the pod and gives response to API server that pod is deleted and that input is also given to ETCD db by API server
+- It is a node based agent
+- It enables comm between worker node and control plane
+
+> Kube-Proxy
+- It enables the networking between pod
+ -It creates some IP tables, rules which helps to between pods.
+
+
+Example of explaining entire architecture of K8:
+
+Lets say a user requested to create a pod. Steps are as follows:
+1. User requested to create a pod by using kubectl.
+2. First the requests comes to API server.
+3. API server will do authentication and validation of the request.
+4. Lets say if user sends "kubectl create pod"
+5. API server receives it and post authentication and validation, API server will send the instruction to ETCD to add an entry in the database.
+6. ETCD database will sends reply back to API server that entry has been made.
+7. Schedular which is running all the time which is monitoring control plan all the time, it know that a request has been received to create a pod.
+8. Schedular will search for the node which can accommodate the node and sends instructions to API server to create the pod on the particular node.
+8. Now API server will interact Kubelet stating "Hey I have a job for you, please schedule a pod on your node".
+9. By receiving the inputs Kubelet will schedule a pod on the node and post creating it, it will send the inputs back to API server.
+10. API server will confirm ETCD to update that the pod has been created on the particular node and all the work has been completed.
+11. Finally the user will be receiving the message that pod has been created by API server.
+
 
 
 
