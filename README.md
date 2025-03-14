@@ -416,7 +416,7 @@ nodes:
 > vi config.yaml
 
 3. Now lets use the previous command to create cluster 
-> kind create cluster --image kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f --name -cka-cluster2 --config config.yaml
+> kind create cluster --image kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f --name cka-cluster2 --config config.yaml
 - This command will use the content of the config.yaml and creates 1 control plane and 2 worker nodes
 
 4. Now we have 2 clusters, 1 cluster has 1 default node created and another cluster has 2 workernodes created
@@ -453,7 +453,7 @@ https://kubernetes.io/docs/reference/kubectl/generated/kubectl_config/kubectl_co
 
 
 
-
+### Day7  Pod In Kubernetes Explained | Imperative VS Declarative Way | YAML
 
 
 
