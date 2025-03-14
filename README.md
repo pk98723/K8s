@@ -455,6 +455,69 @@ https://kubernetes.io/docs/reference/kubectl/generated/kubectl_config/kubectl_co
 
 ### Day7  Pod In Kubernetes Explained | Imperative VS Declarative Way | YAML
 
+POD:
+Lets trying to create a Pod which resides I worker node
+
+Running the workload on the pod/container is the main purpose of the K8
+
+There are two ways of creating a pod
+1. Imperative
+2. Declarative
+
+Imperative
+- In which we run simple commands Kubectl  pod
+- Basically you are instructing your API servers/Kubectl utility to run commands and get some details
+
+Declarative
+- you actually create a configuration file, you will define everything in either JSON and YAML.
+
+
+Now Lets see things in action:
+
+Imperative way example
+> kubectl run nginx-pod --image=nginx:latest
+pod/nginx-pod created
+
+> kubectl get pod
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-pod   1/1     Running   0          68s
+PS C:\Users\pavan>
+
+Declarative way example
+
+We are using Yaml - It is super simple easy to use and it is clean, mostly Yaml is used as serialized and configuration language. In most of the tools like prmothesis this is used.
+
+
+create a pod using the imperatice command and se nginx as image
+
+create the yaml from the nginx created in task1 and update the pod name and use that to create a new pod
+
+apply the below yaml and fix the error
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test
+  name: redis
+spec:
+  containers:
+  - image: rediss
+    name: redis
+
+corrected
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test
+   name: redis
+spec:
+  containers:
+  - image: redis
+    name: redis
+
+
 
 
 
