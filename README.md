@@ -352,7 +352,104 @@ Lets say a user requested to create a pod. Steps are as follows:
 10. API server will confirm ETCD to update that the pod has been created on the particular node and all the work has been completed.
 11. Finally the user will be receiving the message that pod has been created by API server.
 
+K8 architecture and user case - Link : https://app.eraser.io/workspace/dU7YCPHhGMiEG7GouAFL?origin=share
 
+
+
+### DAY 6 - INSTALL AND SETUP DOCKER, KIND, GO to CREATE CLUSTERS
+
+Install Docker
+ - Use below link to install docker on desktop version app
+
+Kind
+- User below link to install kind. Here i am using kind but you can also use minicube as local version of kubernates
+- URL - https://kind.sigs.k8s.io/ (Use "choco install kind" command to install)
+- Yo use Kind, it is mandatory to install GO and Docker.
+- Kind is local version of Kubernates
+
+Go
+- Use below link to insatll Go
+- URL https://go.dev/
+- Download the .exe file and install it.
+
+Some more re-reqs:
+> Install VIM editor for creation of files - https://www.vim.org/download.php (download the installer file), Also add the C:\Program Files\Vim\vim91 to the environmental variable (both paths's)
+> Install Kubectl utility. follow url - https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/ (pick up the curl command to install)
+
+Now lets setup cluster:
+1. Open the https://kind.sigs.k8s.io/docs/user/quick-start/ link to create the cluster.
+> kind create cluster
+- Run the above command to creare the cluster
+
+But to run a specfic version of kubernates
+> kind create cluster --image kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f --name -cka-cluster1
+- Use the link https://github.com/kubernetes-sigs/kind/releases to find the latest version kubernatest. In above case i am using 1.32v.
+- We are creating a cluster with name "cka-cluster1"
+
+Once you run the above command, it will create a series of steps as shown below
+- Ensuring node image (kindset/node:v1.32.0)
+- Preparing nodes
+- Writing configuration
+- Starting control-plane
+- Installing CNI
+- Installing StorageClass
+
+2. After above stepe completed, run below command using kubectl check if the cluster is created correctly or not
+> kubectl cluster-info --context kind-cka-cluster1
+
+Now lets see how many nodes are running on this cluster
+> kubectl get nodes
+- This step will give us the nodes running on the cluster we just created.
+- By default, the cluster will be created with single node(control plane)
+
+Now as you are aware, we need to have a control plane and a worker node, lets create it now.
+1. Now route to below URL and copy the below code. The below code will create 1 control-plane and 2 worker nodes
+
+> kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+  
+2. Go to the terminal and open a new file to paste the above code.
+> vi config.yaml
+
+3. Now lets use the previous command to create cluster 
+> kind create cluster --image kindest/node:v1.32.2@sha256:f226345927d7e348497136874b6d207e0b32cc52154ad8323129352923a3142f --name -cka-cluster2 --config config.yaml
+- This command will use the content of the config.yaml and creates 1 control plane and 2 worker nodes
+
+4. Now we have 2 clusters, 1 cluster has 1 default node created and another cluster has 2 workernodes created
+5. Lets check how to switch between 2 clusters to identify how many nodes are running in each cluster
+6. Run the below command to know which cluster is active now
+> kubectl config get-contexts
+CURRENT   NAME                CLUSTER             AUTHINFO            NAMESPACE
+*         kind-cka-cluster2   kind-cka-cluster2   kind-cka-cluster2
+          kind-kind           kind-kind           kind-kind
+
+- * represents that cluster is the current/active cluster
+7. Lets switch to another cluster
+> kubectl config use-context kind-kind
+Switched to context "kind-kind".
+- Use-context keywork will help to switch/swap between the clusters.
+
+> kubectl get nodes
+NAME                 STATUS   ROLES           AGE   VERSION
+kind-control-plane   Ready    control-plane   21h   v1.32.2
+- So kind-kind cluster has one default node, as shown above.
+
+> kubectl config use-context kind-cka-cluster2
+Switched to context "kind-cka-cluster2".
+
+> kubectl get nodes
+NAME                         STATUS   ROLES           AGE   VERSION
+cka-cluster2-control-plane   Ready    control-plane   12m   v1.32.2
+cka-cluster2-worker          Ready    <none>          10m   v1.32.2
+cka-cluster2-worker2         Ready    <none>          10m   v1.32.2
+- kind-cka-cluster2 has 1 control-plane and 2 nodes.
+
+## Important cheatsheet URL:
+https://kubernetes.io/docs/reference/kubectl/generated/kubectl_config/kubectl_config_set-context/
 
 
 
