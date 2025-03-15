@@ -571,6 +571,142 @@ spec:
 - replicaset will control all the pods which are currently present and which are created during the replicaset created
 
 
+## Deployment: 
+
+- The deployment will sit on top of replicaset. As a user if we create a deployement, then it will create the replicaset.
+- It will provide some additional functionality.
+- If you see the deployment diagram, we see 3 pods in it. Lets say the nginx version needed some upgraded version to be deployed. So in general, if we do any upgrades like this we will impact due to downtime especially in any banking apps etc.,
+- So this is handled by deployment without any downtime.
+- In our diagram we see 3 pods, lets say we would like to upgrade the version from 1.1 to 1.2.
+- When we upgrade the verion from 1.1 to 1.2 is happening on Pod 1 then traffic will be moved onto Pod 2 and 3. If needed the deployment functionality will create a new pod with old version incase there is huge traffic on the application.
+- Similarly when the upgrade completes on Pod1 and the upgrade starts on Pod2, then Pod1 and 3 will be the medium for the traffic flow.
+- We can also roll back the version we just upgraded if needed by commands.
+- lets see the commands related to deployment below along with the YAML:
+
+Deploy-YAML code:
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dep
+  labels:
+    env: demo
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+           
+  replicas: 3
+  selector:
+    matchLabels:
+      env: demo
+      
+- Lets apply the above changes and run the deployment yaml
+> kubectl apply -f deploy.yaml
+Output:
+C:\Users\pavan>kubectl apply -f deploy.yaml
+deployment.apps/nginx-dep created
+
+- Post succesfull deployment, lets see how many pods are created. In the YAML we mentioned 3, so 3 pods should be created.
+> kubectl get pods
+Output:
+C:\Users\pavan>kubectl get po
+NAME                         READY   STATUS    RESTARTS   AGE
+nginx-dep-7fff95c694-nztzg   1/1     Running   0          27s
+nginx-dep-7fff95c694-phch8   1/1     Running   0          27s
+nginx-dep-7fff95c694-tf4vl   1/1     Running   0          27s
+
+- Lets see the deployment details by running the below command
+> kubectl get deploy
+Output:
+C:\Users\pavan>kubectl get deploy
+NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-dep   3/3     3            3           37s
+
+- Now lets see what are all the components created by deployment yaml by running the below command.
+- If you see we have 3 pods, 1 deployment, and 1 replicaset was created. You can ignore service for now as it is a default service created on the kubernates cluster.
+> kubectl get all
+Output:
+C:\Users\pavan>kubectl get all
+NAME                             READY   STATUS    RESTARTS   AGE
+pod/nginx-dep-7fff95c694-nztzg   1/1     Running   0          51s
+pod/nginx-dep-7fff95c694-phch8   1/1     Running   0          51s
+pod/nginx-dep-7fff95c694-tf4vl   1/1     Running   0          51s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   31h
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx-dep   3/3     3            3           51s
+
+NAME                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-dep-7fff95c694   3         3         3       51s
+
+- Now lets do an image upgrade by running below command
+- Here we are doing nginx version upgrade to 1.9.1.
+- Since we have 3 pods, the upgrade happens on 3 pods one by one without downtime.
+> kubectl set image deploy/nginx-dep nginx=nginx:1.9.1
+Output:
+C:\Users\pavan>kubectl set image deploy/nginx-dep nginx=nginx:1.9.1
+deployment.apps/nginx-dep image updated
+
+- Post upgrade, lets check the version upgraded.
+- Note the upgrade happened on the running deployment so the changes dint happened in the YAML file we used intially. so be careful when you run the previous deployment
+> kubectl describe deploy/nginx-dep
+Outpus:
+C:\Users\pavan>kubectl describe deploy/nginx-dep
+Name:                   nginx-dep
+Namespace:              default
+CreationTimestamp:      Sat, 15 Mar 2025 23:42:13 +0530
+Labels:                 env=demo
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               env=demo
+Replicas:               3 desired | 1 updated | 4 total | 3 available | 1 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  env=demo
+  Containers:
+   nginx:
+    Image:         nginx:**1.9.1**
+    Port:          <none>
+    Host Port:     <none>
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  nginx-dep-7fff95c694 (3/3 replicas created)
+NewReplicaSet:   nginx-dep-d6786cfc7 (1/1 replicas created)
+
+- Lets say you want to see what are the recent rollouts/upgrades happened on the pods, run below command.
+- So the output of this command specifically talks about the recent deployment and the name of Pod.
+> kubectl rollout history deploy/nginx-dep
+Output:
+C:\Users\pavan>kubectl rollout history deploy/nginx-dep
+deployment.apps/nginx-dep
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
+- If we want to roll back the upgrade, we can run undo command a follows and do a descrive command, you will notice the difference.
+> kubectl rollout undo deploy/nginx-dep
+Output:
+C:\Users\pavan>kubectl rollout undo deploy/nginx-dep
+deployment.apps/nginx-dep rolled back
+
 # 3 ways to modify the replica count from YAML
 
 1. Use below command 
