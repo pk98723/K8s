@@ -302,6 +302,8 @@ There are sub compoenents in above components, their usage and definations are d
 - It store everything about the cluster like its state, pods, nodes, secrets etc.,
 - Only API server will interact with ETCD db, it is nly having authority to do the changes.
 - Any data needed to be retrieved from ETCD db will also be done by API server only.
+- In ETCD, only Json format data is stored/saved.
+  example: {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"run":"ngnix-pod"},"name":"ngnix-pod","namespace":"default"},"spec":{"containers":[{"image":"ngnix","name":"ngnix-pod","ports":[{"containerPort":80}],"resources":{}}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always"},"status":{}}
 
 > Schedular
 - It receives the request from API server and then lets say someone request to schedule a POD.
@@ -487,12 +489,12 @@ Declarative way example
 
 We are using Yaml - It is super simple easy to use and it is clean, mostly Yaml is used as serialized and configuration language. In most of the tools like prmothesis this is used.
 
+Questions:
+1. Create a pod using the imperative command and se nginx as image
 
-create a pod using the imperatice command and se nginx as image
+2. Create the yaml from the nginx created in task1 and update the pod name and use that to create a new pod
 
-create the yaml from the nginx created in task1 and update the pod name and use that to create a new pod
-
-apply the below yaml and fix the error
+3. Apply the below yaml and fix the error
 
 apiVersion: v1
 kind: Pod
@@ -505,17 +507,9 @@ spec:
   - image: rediss
     name: redis
 
-corrected
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    app: test
-   name: redis
-spec:
-  containers:
-  - image: redis
-    name: redis
+
+
+### Day 8 Replication controler and replica set
 
 
 
