@@ -511,7 +511,85 @@ spec:
 
 ### Day 8 Replication controler and replica set
 
+Now if we have 1 pod running and all of a sudden we see it crashes or stopped working it means the entire application is down for the end users and major downtime.
 
+So to overcome this, in Kubernates there is a concept called replication. using this we can overcome this problem.
+
+Lets see an example here:
+
+-> we will define a replica count when we write a YAML file which states build the PODs depending upon the count/number mentioned in the replica value defined.
+
+> Example code for Replication Controller:
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-rcset
+  labels:
+    env: demo
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+           
+  replicas: 3
+  ______________________________________________________________
+> Example code for ReplicaSet:
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rcset
+  labels:
+    env: demo
+spec:
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
+           
+  replicas: 3
+  selector:
+    matchLabels:
+      env: demo
+
+# Difference between replication controller and replicaset:
+
+- replication controller will control only pods created during the deployment of replication controller
+
+- replicaset will control all the pods which are currently present and which are created during the replicaset created
+
+
+# 3 ways to modify the replica count from YAML
+
+1. Use below command 
+> kubectl scale --replica=10 rc/ngnix-rcset
+- This command will scale the pods inside the ngnix-rcset replicaset to 10 count.
+- This count you are editing in live so no need to run apply command
+
+2. Use below command
+> kubectl edit rc/ngnix-rcset
+- This command will open the code in the notepad or editoral format to edit the code.
+- This count you are editing in live so no need to run apply command
+
+3. Using VIM/VI editor to edit the count.
+> vim rcset.yaml
+> enter "i" to enter insert mode
+> edit the count
+> enter :wq! to save the count
+- Once above command is saved, run below command to apply changes
+> kubectl apply -f rcset.yaml
 
 
 
