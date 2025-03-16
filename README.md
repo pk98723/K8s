@@ -732,10 +732,10 @@ deployment.apps/nginx-dep rolled back
 Def of services: A service is a communication between user to frontend, frontend to backend and backend to database on a Pod via ports. Refer the flow chart in the eraser.io tool
 
 There are 4 types of services in Kubernates:
-> ClusterIP
-> Nodeport
-> External names
-> Load balancers
+1. ClusterIP
+2. Nodeport
+3. External names
+4. Load balancers
 
 - Now lets see them one by one in detail.
 
