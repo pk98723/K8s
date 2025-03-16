@@ -727,19 +727,19 @@ deployment.apps/nginx-dep rolled back
 - Once above command is saved, run below command to apply changes
 > kubectl apply -f rcset.yaml
 
-### Day 9 SERVICES:
+# Day 9 SERVICES:
 
 Def of services: A service is a communication between user to frontend, frontend to backend and backend to database on a Pod via ports. Refer the flow chart in the eraser.io tool
 
 There are 4 types of services in Kubernates:
-# ClusterIP
-# Nodeport
-# External names
-# Load balancers
+> ClusterIP
+> Nodeport
+> External names
+> Load balancers
 
 - Now lets see them one by one in detail.
 
-# Nodeport: 
+## Nodeport: 
 Lets say a user wants to access an application hosted on a Pod then as shown in the diagram, there are 3 ports referring 
 -> nodeport 
 - This is port where it is exposed externally that means if a user wants to access the app on the pod then it will be accessed on the nodeport. 
