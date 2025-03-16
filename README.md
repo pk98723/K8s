@@ -651,7 +651,7 @@ replicaset.apps/nginx-dep-7fff95c694   3         3         3       51s
 - Now lets do an image upgrade by running below command
 - Here we are doing nginx version upgrade to 1.9.1.
 - Since we have 3 pods, the upgrade happens on 3 pods one by one without downtime.
-> kubectl set image deploy/nginx-dep nginx=nginx:1.9.1
+> kubectl set image deploy/nginx-dep nginx=nginx:1.9.1 (to update from version 1.23.0 to 1.23.4, we only specify the name of the pod to update but not the version. ex: kubectl set image deploy/nginx nginx=nginx:1.23.4  is correct command, but PS kubectl set image deploy/nginx nginx:1.23.0=nginx:1.23.4 is wrong command)
 Output:
 C:\Users\pavan>kubectl set image deploy/nginx-dep nginx=nginx:1.9.1
 deployment.apps/nginx-dep image updated
@@ -727,7 +727,33 @@ deployment.apps/nginx-dep rolled back
 - Once above command is saved, run below command to apply changes
 > kubectl apply -f rcset.yaml
 
+### Day 9 SERVICES:
 
+Def of services: A service is a communication between user to frontend, frontend to backend and backend to database on a Pod via ports. Refer the flow chart in the eraser.io tool
+
+There are 4 types of services in Kubernates:
+# ClusterIP
+# Nodeport
+# External names
+# Load balancers
+
+- Now lets see them one by one in detail.
+
+# Nodeport: 
+Lets say a user wants to access an application hosted on a Pod then as shown in the diagram, there are 3 ports referring 
+-> nodeport 
+- This is port where it is exposed externally that means if a user wants to access the app on the pod then it will be accessed on the nodeport. 
+- This is a static port so we need to define the port number manually
+- The range of this port is 30000 - 32767
+
+-> targetport
+- This is the port where the application is running on the pod.
+- So though user is trying to access the app on the port from the nodeport range externally, the application is running on targetport internally.
+
+-> port 
+- This is the port on which Pod is available for other pods.
+- This is not related to application accessibility to user, this is only available to other pods communication.
+- Incase we dint mention anything, then by default port 80 is taken.
 
 
 
